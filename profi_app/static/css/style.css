@@ -217,7 +217,7 @@ body .nav-links {
   position: absolute;
   background-color: #fff;
   right: 0px;
-  height: 92vh;
+  height: 100%;
   top: 8vh;
   display: none;
   -webkit-box-orient: vertical;
