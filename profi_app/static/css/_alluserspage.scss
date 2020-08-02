@@ -1,0 +1,28 @@
+// ALL USERS PAGE
+.all_users_page_container{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    #all_users_display{
+        #user_name{
+            text-align: left;
+        }
+    }
+}
+
+
+// *****************************************************************************************
+// ************************************    MEDIA SCREEN    *********************************
+// *****************************************************************************************
+
+// ALL USERS PAGE
+@media screen and (max-width:480px){
+    table{
+        font-size: 0.8rem;
+        .display_none{
+            display: none;
+        }
+    }
+
+}

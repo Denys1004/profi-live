@@ -1,0 +1,60 @@
+// VIEW JOB PAGE
+// *****************************************************************************************
+a{
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+#job_details{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mybutton2{
+    min-width: 100px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: $white;
+    border: 2px solid $red;
+    color: $red;
+    &:hover{
+        background-color: $red;
+        border: 2px solid $red;
+        color: $white;
+        text-decoration: none;
+    }
+}
+.mybutton3{
+    min-width: 100px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: $red;
+    border: 2px solid $red;
+    color: $white;
+    margin-bottom: 10px;
+    &:hover{
+        background-color: $white;
+        border: 2px solid $red;
+        color: $red;
+        text-decoration: none;
+    }
+}
+.cat_desc{
+    color: $darkgrey;
+}
+
+.comment_p{
+    color: $black;
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 0;
+    padding-top: 10px;
+}
+.posted_info{
+    color: $darkgrey;
+    .postedby{
+        font-size: 13px;
+    }
+}

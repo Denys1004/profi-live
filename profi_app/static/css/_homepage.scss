@@ -1,0 +1,368 @@
+// HOME PAGE
+// *****************************************************************************************
+// image container
+#main_image{
+    height: 520px;
+    width: 100%;
+    background: url(../images/people.jpg) no-repeat top center;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    #title_container{
+        background-color: rgba(255, 255, 255, 0.92);
+        padding: 20px 30px;
+        max-width: 700px;
+        margin: 0 auto 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .title_span{
+            color: $red;
+            font-weight: bold;
+        }
+        #title{
+            h1{
+                text-align: left;
+                margin-right: 20px;
+                flex: 3;
+            }
+        }
+        #button_container{
+            text-align: right;
+            flex: 1;
+            display: inline-block;
+            .devider{
+                width: 20px;
+                height: 20px;
+            }
+            .place_btn{
+                background-color: $white;
+                border: 2px solid $red;
+                padding: 10px 20px;
+                color: $red;
+                text-align: center;
+                display: block;
+                width: 120px;
+                &:hover{
+                    text-decoration: none;
+                    background-color: $red;
+                    color: $white;
+                }
+            }
+            .find_btn{
+                background-color: $red;
+                border: 2px solid $red;
+                padding: 10px 20px;
+                text-align: center;
+                color: $white;
+                display: block;
+                width: 120px;
+                &:hover{
+                    text-decoration: none;
+                    background-color: $white;
+                    color: $red;
+                }
+            }
+        }
+    }
+}
+// steps container
+main{
+    text-align: center;
+    background-color: $white;
+    h3{
+        font-weight: bold; 
+        padding: 20px;
+    }
+    #steps_container{
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        padding: 10px 20px;
+        .descripion_container{
+            text-align: center;
+            width: 25%;
+            flex:1;
+            display: inline-block;
+            img{
+                height: 80px;
+            }
+            h4{
+                font-weight: bold; 
+                margin-top: 10px;
+                color: $black;
+                a{
+                    color: $black;
+                }
+            }
+            p{
+                .desc_span{
+                    font-weight: bold;
+                }
+            }
+        }
+        .step2{
+            margin: 0 30px;
+        }
+    }
+}
+// mobile App container
+section{
+    background-color: $grey;
+    padding-top: 20px;
+    #phone_container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        .phone_text{
+            text-align: right;
+            padding-left:20px ;
+            h1{
+                color: $black;
+                letter-spacing: 1px;
+            }
+        }
+        .phone_image{
+            flex:1.5;
+            text-align: center;
+            img{
+                width: 90%;
+            }
+        }
+    }
+}
+
+
+// *****************************************************************************************
+// ************************************    MEDIA SCREEN    *********************************
+// *****************************************************************************************
+// HOME PAGE
+// main_image div container
+@media screen and (max-width:1132px){
+    #main_image{    
+        #title_container{
+            max-width: 70%;
+            #title{
+                h1{
+                    font-size: 32px;
+                }
+            }
+            #button_container{
+                .devider{
+                    width: 18px;
+                    height: 18px;
+                }
+                .place_btn{
+                    padding: 6px 12px;
+                    width: 100px;
+                }
+                .find_btn{
+                    padding: 6px 12px;
+                    width: 100px;
+                }
+            }
+        }
+    } 
+}
+@media screen and (max-width:807px){
+    #main_image{    
+        #title_container{
+            #title{
+                h1{
+                    font-size: 28px;
+                }
+            }
+            #button_container{
+                .devider{
+                    width: 16px;
+                    height: 16px;
+                }
+                .place_btn{
+                    padding: 5px 10px;
+                    width: 98px;
+                }
+                .find_btn{
+                    padding: 5px 10px;
+                    width: 98px;
+                }
+            }
+        }
+    } 
+}
+@media screen and (max-width:550px){
+    #main_image{    
+        #title_container{
+            #title{
+                h1{
+                    font-size: 22px;
+                }
+            }
+            #button_container{
+                .devider{
+                    width: 14px;
+                    height: 14px;
+                }
+                .place_btn{
+                    padding: 4px 7px;
+                    width: 92px;
+                }
+                .find_btn{
+                    padding: 4px 7px;
+                    width: 92px;
+                }
+            }
+        }
+    } 
+}
+@media screen and (max-width:498px){
+    #main_image{   
+        #title_container{
+            flex-direction: column;
+            #title{
+                text-align: center;
+                h1{
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+            }
+            #button_container{
+                display: flex;
+                .place_btn{
+                    padding: 4px 7px;
+                    width: 92px;
+                }
+                .find_btn{
+                    padding: 4px 7px;
+                    width: 92px;
+                }
+            }
+        }
+    } 
+}
+// steps container
+@media screen and (max-width:690px){
+    main{
+        h3{
+            font-size: 26px;
+        }
+        #steps_container{
+            padding: 10px 15px;
+            .descripion_container{
+                text-align: center;
+                width: 25%;
+                flex:1;
+                display: inline-block;
+                img{
+                    height: 80px;
+                }
+                h4{
+                    font-size: 20px;
+                }
+                p{
+                    font-size: 0.84rem;
+                }
+            }
+            .step2{
+                margin: 0 30px;
+            }
+        }
+    } 
+}
+@media screen and (max-width:584px){
+    main{
+        h3{
+            font-size: 24px;
+        }
+        #steps_container{
+            padding: 10px 12px;
+            .descripion_container{
+                width: 27%;
+                img{
+                    height: 70px;
+                }
+                h4{
+                    font-size: 18px;
+                }
+                p{
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    } 
+}
+@media screen and (max-width:503px){
+    main{
+        h3{
+            font-size: 26px;
+        }
+        #steps_container{
+            padding: 10px 15px;
+            flex-direction: column;
+            align-items: center;
+            .descripion_container{
+                text-align: center;
+                width: 100%;
+                flex:1;
+                display: inline-block;
+                img{
+                    height: 80px;
+                }
+                h4{
+                    font-size: 20px;
+                }
+                p{
+                    font-size: 0.84rem;
+                }
+            }
+            .step2{
+                margin: 0 30px;
+            }
+        }
+    } 
+}
+// mobile App container
+@media screen and (max-width:800px){
+    section{
+        padding: 0 20px;
+        #phone_container{
+            flex-direction: column;
+
+            .phone_text{
+                text-align: center;
+                h1{
+                    font-size: 26px;
+                }
+            }
+            .phone_image{
+                text-align: center;
+                margin-top: 20px;
+                img{
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width:510px){
+    section{
+        padding: 0 14px;
+        #phone_container{
+            .phone_text{
+                h1{
+                    font-size: 20px;
+                }
+            }
+            .phone_image{
+                text-align: center;
+                margin-top: 20px;
+                img{
+                    width: 80%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Register</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+    <div class="page_container">
+        <h3>Register New User</h3>
+        {% if messages %}                                                                      				 	
+        <ul class="messages">                                           								
+            {% for message in messages %}                                       							
+                <li class="errors">{{ message }}</li>       									
+            {% endfor %}                                                								
+        </ul>                                                      									
+        {% endif %} 
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" class="form-control" id="first_name" value = "{{request.session.first_name}}">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" class="form-control" id="last_name" value = "{{request.session.last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="birth_date">Birthdate:</label>
+                <input type="date" name="birth_date" class="form-control" id="birth_date" value = "{{request.session.birth_date}}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" class="form-control" id="email" value = "{{request.session.email}}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" class="form-control" id="confirm_password">
+            </div>
+            <div class="button_form">
+                <button class="mybutton">Sign up</button>
+            </div>
+        </form>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+</html>

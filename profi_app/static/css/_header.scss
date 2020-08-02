@@ -1,0 +1,224 @@
+// NAVIGATION
+.nav-container{
+    padding: 0 20px;
+    background-color: $white;
+    height: 8vh;
+    text-align: center;
+    nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 8vh;
+        #menu_container{
+            .menu_list_container{
+                margin-bottom: 0;
+                color: $black;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                min-width: 560px;
+                max-width: 560px;
+                a{
+                    #initials{
+                        background-color: $red;
+                        border-radius: 50%;
+                        font-family: 'Anonymous Pro', monospace;
+                        padding: 8px 8px 8px 10px;
+                        font-size: 25px;
+                        min-width: 50px;
+                        max-width: 50px;
+                        min-height: 50px;
+                        max-height: 50px;
+                        text-transform: uppercase;
+                        color: $white;
+                    }
+                }
+          
+                li{
+                    list-style: none;
+                    display: inline-block;
+                    &:visited{
+                        font-weight: bold;
+                    }
+                    a{
+                        color: $black;
+                        font-size: 18px;
+                        &:visited{
+                            font-weight: bold;
+                        }
+                    }
+     
+                    .login_a{
+                        color: $darkgrey;
+                    }
+                }
+            }
+        }
+
+        #logo_container{
+            a{
+                color: $black;
+                &:hover{
+                    text-decoration: none;
+                }
+                ion-icon {
+                    color: $red;
+                    font-size: 27px;
+                    margin-bottom: -5px;
+                }
+                h4{
+                    color: $black;
+                    text-transform: uppercase;
+                    margin-bottom: 0;
+                    font-family: 'Righteous', cursive;
+                    letter-spacing: 2px;
+                }
+            }
+        }
+
+        #burger_container{
+            display: none;
+            /* BURGER LINES */
+            .burger{
+                cursor: pointer;
+                width: 24px;
+                min-width: 230px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                .line1, .line2, .line3 {
+                    width: 25px;
+                    height: 2px;
+                    background-color: $black;
+                    margin: 3px 0px;
+                    border-radius: 2px;
+                    transition: all 0.4s ease;
+                    align-items: right;
+                }
+            }
+            /* CHANGING BURGER TO CROSS */
+            .toggle .line1{
+                transform: rotate(-45deg) translate(-5px, 7px);
+            }
+            .toggle .line2{
+                opacity: 0;
+            }
+            .toggle .line3{
+                transform: rotate(45deg) translate(-4px, -7px);
+            }
+
+        }
+    }
+}
+body{
+    overflow-x: hidden;
+    /* here we making navlinks under navbar */
+    .nav-links{
+        width: 200px;
+        position: absolute;
+        background-color: $white;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        display: none; 
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        text-align: center;
+
+        #initials_logo{
+            a{
+                display: block;
+                background-color: $red;
+                border-radius: 50%;
+                padding: 18px 12px;
+                font-family: 'Anonymous Pro', monospace;
+                margin: auto;
+                min-width: 80px;
+                max-width: 80px;
+                font-size: 30px;
+                text-transform: uppercase;
+                color: $white;
+            }
+        }
+
+
+
+        li{
+            opacity: 0;
+            padding: 20px 0px;
+            a{
+                color: $black;
+                letter-spacing: 2px;
+                margin-top: 20px;
+            }
+        }   
+    }
+    /* when you click on burger, we want navbar to be visible and 
+    we need to move it back, because now its hidden x 100%  */
+    .nav-active{
+        transform: translateX(0%);
+        display: flex;
+    }
+    /* Animation to make menu apear one by one */
+    @keyframes navLinkFade{
+        from{
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+}
+
+
+
+// *****************************************************************************************
+// ************************************    MEDIA SCREEN    *********************************
+// *****************************************************************************************
+// Navigation
+@media screen and (max-width:750px){
+    .nav-container{
+        text-align: center;
+        nav{
+            #menu_container{
+                display: none;
+            }
+
+            #logo_container{
+                flex:2;
+                text-align: left;
+                ion-icon {
+                    color: $red;
+                    font-size: 27px;
+                    margin-bottom: -5px;
+                    margin-left: 30px;
+                }
+                h4{
+                    color: $black;
+                    text-transform: uppercase;
+                    margin-bottom: 0;
+                    font-family: 'Righteous', cursive;
+                    letter-spacing: 2px;
+                }
+            }
+            #burger_container{
+                display: block;
+                text-align: right;
+                .burger{
+                    min-width: 30px;
+                }
+            }
+
+
+            .nav-links{
+                text-align: center;
+                #nav_logo{
+                    text-align: center;
+                } 
+            }
+        }
+    }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+
+    <title>Dashboard</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    
+    <div class="dashboard_page_container">
+        <div class="dash">
+            {% if request.session.user_id != null %}
+            <a class="mybutton" href="/create_new_job">Create New job</a>
+            {% endif %}
+            <h1>Dashboard</h1>
+            {% if request.session.user_id == null %}
+            <small>*Please <a href="/login">login</a> to be able to use full App</small>
+            <br>
+            {% endif %}
+        </div>
+
+        {% if messages %}     
+            {% for message in messages %}                                                            				 	
+            <div class="succsess_messages">
+                <p class="success">{{ message }}</p>
+                <a href="/dashboard">x</a>      									                                            								
+            </div> 
+            {% endfor %}                                                      									
+        {% endif %} 
+
+        {% if request.session.user_id != null %}
+        <div class="sort_container">
+            <form class='sort' action="/dashboard/show" method="post">
+                {% csrf_token %}
+                <div class="input_field">
+                    <label for='category'>Category:</label>
+                    <select id="category" name="category">
+                        <option value="{{ active_category.name }}" selected>{{ active_category.name }}</option>
+                        {% for category in all_categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <button class="mybutton4">Show</button>
+            </form>
+        </div>
+        {% endif %} 
+
+        <div class="pagination_container">
+            <!-- this link need for << >> symbols -->
+            <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
+            <div class="pagination">
+                {% if jobs.has_previous %} 										
+                    <a href="?page=1"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>      					
+                    <a href="?page={{ jobs.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>	
+                {% endif %} 
+        
+                {% for num in jobs.paginator.page_range %} 	
+                    {% if jobs.number == num %}
+                        <strong id="page_num">{{ num }}</strong>											
+                    {% elif num > jobs.number|add:'-2' and num < jobs.number|add:'2' %}					
+                        <a href="?page={{num}}">{{num}}</a>													
+                    {% endif %}														
+                {% endfor %}
+        
+                {% if jobs.has_next %} 												
+                    <a href="?page={{ jobs.next_page_number }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <a href="?page={{ jobs.paginator.num_pages }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                {% endif %} 
+            </div>
+        </div>
+
+        <div id="display_jobs">
+        {% for job in jobs %}
+            <!-- if nobody does this job -->
+            {% if job.executor == null %}
+                <div class="job_container">
+                    <div class="top_desc">
+                        <div class="job_title">
+                            <h5><a href="/view/{{job.id}}">{{ job.title|slice:":20" }}...</a></h5>
+                        </div>
+                        <div class="action">
+                            <a href="/view/{{job.id}}">View <span class='vertical'>|</span></a> 
+                            {%if job.executor.id == null and request.session.user_id != null %}
+                            <a href="/add_job/{{job.id}}">Add <span class='vertical'>|</span></a>
+                            {% endif %}
+                            {% if job.poster.id == request.session.user_id %}
+                                <a href="/edit_job/{{job.id}}">Edit <span class='vertical'>|</span></a> 
+                                <a href="/remove_job/{{job.id}}">Remove</a> 
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bottom_desc">
+                        <p>{{ job.description|slice:":280" }}<a href="/view/{{job.id}}">...View</a></p>
+                        <small>Posted {{ job.created_at|date:"SHORT_DATE_FORMAT" }} by <a href="/user/{{ job.poster.id }}/profile">{{ job.poster.first_name }} {{ job.poster.last_name.0 }}.</a></small>
+                        <!-- COMMENTS -->
+                        {% if request.session.user_id != null %}
+                            {% if job.comments.count > 0 %}
+                            <div class="comments_count_container">
+                                <small class="comments_count"><a href="/view/{{job.id}}"><span>Comments:</span> {{job.comments.count}}</a></small>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+            {% endif %} 
+        {% endfor %}
+        </div>
+    </div>
+    
+
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>User Profile</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    
+    <div class="dashboard_page_container">
+        <div id="profile_header">
+            <h1 id="profile_initial">{{ initials }}</h1>
+            <div class="personal_info">
+                
+                {% if request.session.user_id != null %}
+                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                    <p>{{ user.email }}</p>
+                    <p id="dob"> DOB: {{ user.birth_date|date:'Y/m/d' }}</p>
+                {% else %}
+                    <h3>{{ user.first_name }} {{ user.last_name.0 }}.</h3>
+                {% endif %}
+            </div>
+        </div>
+        {% if messages %}     
+            {% for message in messages %}                                                            				 	
+            <div class="succsess_messages">
+                <p class="success">{{ message }}</p>
+                <a href="/user/{{user.id}}/profile">x</a>      									                                            								
+            </div> 
+            {% endfor %}                                                      									
+        {% endif %} 
+        <!-- For logged in user -->
+        {% if user.id == request.session.user_id %}
+            {% if all_active_jobs|length > 0 %}
+                <h3 class="active">Active jobs:</h3>
+                <table class="table table-bordered mt-1">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Job</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in all_active_jobs %}
+                            <!-- if logged user doing this job, display this -->
+                            {% if job.executor != null and job.executor.id == request.session.user_id %}
+                            <tr>
+                                <td class="td_job">
+                                    <p>{{ job.title }}</p> 
+                                    <small>{{ job.description|slice:":290" }}</small>
+                                    <a href="/view/{{job.id}}">...View</a>
+                                    {% if job.comments.count > 0 %}
+                                    <div class="comments_count_container">
+                                        <small class="comments_count"><a href="/view/{{job.id}}"><span>Comments:</span> {{job.comments.count}}</a></small>
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="td_action">
+                                    <!-- <a href="/view/{{job.id}}">View | </a>  -->
+                                    <a href="/done_job/{{job.id}}">Done <span class='vertical'>|</span></a>  
+                                    <a href="/giveup_job/{{job.id}}">GiveUp</a>
+    
+                                </td>                      
+                            </tr>
+                            {% endif%}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <h3 class="no_work_mess">No active jobs</h3>
+            {% endif %}
+
+            {% if all_posted_jobs|length > 0 %}
+                <h3 class="work_mess">All jobs posted by {{ user.first_name }}:</h3>
+                {% for posted_job in all_posted_jobs %}
+                <div class="posted_job_container">
+                    <div class="posted_job_title">
+                        <p>{{ posted_job.title }}</p>
+                        <small>{{ posted_job.location }}</small> <br>
+                        <small class='darkgrey'>Posted {{ posted_job.created_at|date:'Y/m/d'}}</small>
+                        {% if posted_job.comments.count > 0 %}
+                        <div class="comments_count_container">
+                            <small class="comments_count"><a href="/view/{{posted_job.id}}">Comments: {{posted_job.comments.count}}</a></small>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="action">
+                        <a href="/view/{{posted_job.id}}">View <span class='vertical'>|</span></a> 
+                        {%if posted_job.executor.id == null and request.session.user_id != null %}
+                        <a href="/add_job/{{posted_job.id}}">Add <span class='vertical'>|</span></a>
+                        {% endif %}
+                        {% if posted_job.poster.id == request.session.user_id %}
+                            <a href="/edit_job/{{posted_job.id}}">Edit <span class='vertical'>|</span></a> 
+                            <a href="/remove_job/{{posted_job.id}}">Remove</a> 
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+            {% else %}
+                <h3 class="no_work_mess">No posted jobs</h3>
+            {% endif %}
+
+        {% else %}
+            <h3 class="work_mess">All jobs posted by {{ user.first_name }}</h3>
+            {% for posted_job in all_posted_jobs %}
+            <div class="posted_job_container">
+                <div class="posted_job_title">
+                    <p>{{ posted_job.title }}</p>
+                    <small>{{ posted_job.location }}</small> <br>
+                    <small>Posted {{ posted_job.created_at }}</small>
+                </div>
+
+                <div class="action">
+                    <a href="/view/{{posted_job.id}}">View <span class='vertical'>|</span></a> 
+                    {%if posted_job.executor.id == null and request.session.user_id != null %}
+                    <a href="/add_job/{{posted_job.id}}">Add <span class='vertical'>|</span></a>
+                    {% endif %}
+                    {% if posted_job.poster.id == request.session.user_id %}
+                        <a href="/edit_job/{{posted_job.id}}">Edit <span class='vertical'>|</span></a> 
+                        <a href="/remove_job/{{posted_job.id}}">Remove</a> 
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+</html>

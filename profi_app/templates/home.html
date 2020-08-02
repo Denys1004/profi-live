@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    
+    <div id="main_image">
+        <div id='title_container'>
+            <div id="title">
+                <h1>There are <span class='title_span'>pros</span> for any task and <span class='title_span'>tasks</span> for any pro!</h1>
+            </div>
+            <div id="button_container">
+                {% if request.session.user_id != null %}
+                <a class="job_btn place_btn" href="/create_new_job">Place Job</a>
+                <div class="devider"></div>
+                {% endif %}
+                <a class="job_btn find_btn" href="/dashboard">Find Job</a>
+            </div>
+        </div>
+    </div>
+    <main>
+        <h3>How it works</h3>
+        <div id="steps_container">
+            <div class="descripion_container step1">
+                <img id="img_sign_in" src="{% static 'images/sign_in.svg' %}" alt="img_sign_in">
+                <h4><a href="/login">Sign in</a></h4>
+                <p class="description_text">Login, without it you will not be able to add job or take job from the table for execution. Please include your <span class='desc_span'>name</span> and <span class='desc_span'>contact</span> details so other members can contact you if necessary.</p>
+            </div>
+
+            <div class="descripion_container step2">
+                <img id="img_sign_in" src="{% static 'images/choose_job.svg' %}" alt="img_choose_job">
+                <h4><a href="/dashboard">Choose Job</a></h4>
+                <p class="description_text">On the <span class='desc_span'>dashboard</span> page you can see all the available jobs. You can open the job to see it's detailed description, and if this is something you would like to do, you can <span class='desc_span'>Add</span> this job to yourself. Or you can add a new job to the table by clicking <span class='desc_span'>New job</span>.</p>
+            </div>
+
+            <div class="descripion_container step3">
+                <img id="img_sign_in" src="{% static 'images/communicate.svg' %}" alt="img_communicate">
+                {% if request.session.user_id != null %}
+                <h4><a href="/all_users">Сommunicate</a></h4>
+                {% else %}
+                <h4>Сommunicate</h4>
+                {% endif %}
+                <p class="description_text">If you have taken a job for execution, you can contact the person who posted this job to agree on when and how to complete it. Please be polite. When the work is done please mark it by clicking on the <span class='desc_span'>done</span>.</p>
+            </div>
+
+        </div>
+    </main>
+    <section>
+        <div id="phone_container">
+            <div class="phone_text">
+                <h1>Download Mobile App</h1>
+                <small>*there is no mobile App, its just to fill space :)</small>
+            </div>
+            <div class="phone_image">
+                <img id="iphone" src="{% static 'images/iphone.gif' %}" alt="iphone">
+            </div>
+        </div>
+    </section>
+
+
+    {% include 'footer.html' %}
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</body>
+</html>

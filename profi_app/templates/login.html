@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Login</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+    <div class="page_container">
+        <h3>Login</h3>
+        {% if messages %}                                                                      				 	
+        <ul class="messages">                                           								
+            {% for message in messages %}                                       							
+                <li class="errors">{{ message }}</li>       									
+            {% endfor %}                                                								
+        </ul>                                                      									
+        {% endif %} 
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <div class="button_form">
+                <button class="mybutton">Login</button>
+            </div>
+        </form>
+        <br>
+        <p>New User? You may sign up <a class='mybutton' href="/register">here...</a></p>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+</html>

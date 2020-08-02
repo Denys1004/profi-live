@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Edit Job</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+    <div class="success_page_container">
+        <div class="page_container">
+            <div class="display_flex">
+                <h3>{{ cur_user.first_name }}, here you may edit your job.</h3>
+                <a href="/dashboard">Back to Dashboard</a>
+            </div>
+            {% if messages %}                                                                      				 	
+            <ul class="messages">                                           								
+                {% for message in messages %}                                       							
+                    <li class="errors">{{ message }}</li>       									
+                {% endfor %}                                                								
+            </ul>                                                      									
+            {% endif %} 
+            <hr>
+
+            <form action="/edit_job/{{needed_job.id}}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" class="form-control" id="title" value="{{needed_job.title}}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" class="form-control" id="description" value="{{needed_job.description}}">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" name="location" class="form-control" id="location" value="{{needed_job.location}}">
+                </div>
+
+                <div class="form-group">
+                    <label for='category'>Categories:</label>
+                    {% for category in all_categories %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="{{category.id}}">
+                        <label class="form-check-label" for="{{category.name}}">{{category.name}}</label>
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label class="form-check-label mt-2" for="other">Other category</label>
+                        <input type="text" name="other"> 
+                    </div>
+                </div>
+
+                <p>Added Categories: 
+                    <ul>
+                        {% for category in needed_job.categories.all %}
+                        <li class="cat_desc">{{category.name}}  
+                            {% if needed_job.poster.id == cur_user.id %}
+                            <a href="/remove_category/{{category.id}}/{{needed_job.id}}"><span class='vertical'>|</span> Remove</a>
+                            {% endif%}
+                        </li> 
+                        {% endfor %}
+                    </ul>
+                </p>  
+                <button class="mybutton2">Update Job</button>
+            </form>
+            <br>
+            <a class="mybutton2" href="/dashboard">Cancel</a>         
+        </div>
+    </div>
+
+    
+    {% include 'footer.html' %}
+</body>
+</html>
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>View Job</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+    <div class="success_page_container">
+        <div class="page_container">
+            <div class="display_flex">
+                {% if request.session.user_id != null %}
+                <h1 id='job_details'>Hello {{ cur_user.first_name }}! These are the job details!</h1>
+                {% else %}
+                <h1>These are the job details!</h1>
+                {% endif %}
+                <a href="/dashboard">Back to Dashboard</a>
+            </div>
+            <hr>
+            <h4>{{needed_job.title}}</h4>    
+            <p>{{needed_job.description}}</p>
+            <p>Location: {{needed_job.location}}</p>
+            <p>Posted by <a href="/user/{{needed_job.poster.id}}/profile">{{needed_job.poster.first_name}}</a>, {{needed_job.created_at}}</p>
+            <p>Categories: 
+                {% for category in needed_job.categories.all %}
+                <span class='cat_desc'>{{category.name}}<span class='vertical'> |</span></span>
+                {% endfor %}
+            </p>  
+
+            {% if request.session.user_id != null %}
+                {%if needed_job.executor.id == null %}
+                <a class='mybutton2' href="/add_job/{{needed_job.id}}">Add to my list</h3></a>
+                {% endif %}
+                {% if needed_job.executor != null and needed_job.executor.id == request.session.user_id %}
+                <a class='mybutton2' href="/giveup_job/{{needed_job.id}}">Give up this job</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ADD COMMENT -->
+    {% if request.session.user_id != null %}
+    <div class="page_container">
+        <form action="/add_comment/{{needed_job.id}}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea  class="form-control" name="comment" id="comment"></textarea>
+            </div>
+            <button class='mybutton3'>Add Comment</button>
+        </form>
+    
+        {% for comment in needed_job.comments.all %}
+        <div class="comment_container">
+            <p class="comment_p">{{comment.comment}}</p>
+            <div class="posted_info">
+                <p class="postedby"><a href="/user/{{comment.poster.id}}/profile">{{comment.poster.first_name}} {{comment.poster.last_name}}</a>, at {{comment.created_at}}</p>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="page_container">
+        <small>*Please <a href="/login">login</a> to be able use full App</small>
+    </div>
+    {% endif %}
+
+
+    {% include 'footer.html' %}
+</body>
+</html>
+

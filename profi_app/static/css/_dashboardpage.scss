@@ -1,0 +1,200 @@
+// DASHBOARD PAGE
+// *****************************************************************************************
+.dashboard_page_container{
+    a{
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+    .dash{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        .mybutton{
+            width: 30%;
+            min-width: 200px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            flex: 0.2;
+            margin: 20px;
+            background-color: $white;
+            border: 2px solid $red;
+            color: $red;
+            font-weight: bold;
+            text-transform: uppercase;
+            &:hover{
+                background-color: $red ;
+                border: 2px solid $red;
+                color: $white;
+            }
+        }
+    }
+    .sort_container{
+        #category{
+            padding: 3px;
+        }
+    }
+    #display_jobs{
+        .job_container{
+            border: 2px solid $grey;
+            background-color: $white;
+            .top_desc{
+                padding: 5px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .job_title{
+                    h5{
+                        margin: 0;
+                        a{
+                            color: $black;
+                            font-weight: bold;
+                            
+                        }
+                    }
+                }
+                .action{
+                    a{
+                        color: $red;
+                        text-decoration: none;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            .bottom_desc{
+                padding: 0 15px;
+                background-color: $white;
+                p{
+                    margin-bottom: 0rem;
+                    a{
+                        font-weight: bold;
+                    }
+                }
+                small{
+                    font-size: 14px;
+                }
+            }
+            .comments_count_container{
+                .comments_count{
+                    a{
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    .pagination_container{
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        .pagination{
+            margin: auto;
+            a{
+                padding: 1.4px 18px;
+                font-size: 19px;
+                font-weight: bold;
+                color: $black;
+            }
+        }
+        #page_num{
+            font-size: 20px;
+            color: $red;
+        }
+    }
+}
+.sort_container{
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    .sort{
+        display: flex;
+        align-items: center;
+        .mybutton4{
+            min-width: 60px;
+            padding: 0 6px;
+            font-size: 16px;
+            margin-top: 2px;
+            text-align: center;
+            background-color: $darkgrey;
+            border: 2px solid $darkgrey;
+            letter-spacing: 1px;
+            color: $white;
+            margin-bottom: 7px;
+            margin-left: 10px;
+            &:hover{
+                background-color: $white;
+                border: 2px solid $darkgrey;
+                color: $darkgrey;
+                text-decoration: none;
+            }
+        } 
+    } 
+}
+
+
+// *****************************************************************************************
+// ************************************    MEDIA SCREEN    *********************************
+// *****************************************************************************************
+// DASHBOARD PAGE
+@media screen and (max-width:600px){
+    .dashboard_page_container{
+        .job_container{
+            .top_desc{
+                padding: 4px 10px;
+                .job_title{
+                    h5{
+                        font-size: 16px;
+                    }
+                }
+                .action{
+                    a{
+                        font-size: 13px;
+                    }
+                }
+            }
+            .bottom_desc{
+                font-size: 14px;
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:500px){
+    .sort_container{
+        .sort{
+            label{
+                font-size: 14px;
+            }
+            #category{
+                padding: 2px;
+                font-size: 14px;
+            }
+            .mybutton4{
+                min-width: 50px;
+                padding: 0 4px;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                margin-bottom: 8px;
+                margin-left: 8px;
+            } 
+        }
+        .mybutton5{
+            min-width: 50px;
+            padding: 0 4px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            margin-left: 8px;
+        }  
+    }
+}

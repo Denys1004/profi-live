@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>All Users</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+
+    <div class="all_users_page_container">
+        <h3>Users</h3>
+        <div id="all_users_display">
+            <table class="table table-bordered mt-1">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th class="display_none">Posted jobs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td id="user_name"> <a href='user/{{ user.id }}/profile'>{{ user.first_name }} {{user.last_name}}</a></td>
+                        <td>{{ user.email }}</td>
+                        <td class="display_none"><a href='user/{{ user.id }}/profile'>{{ user.poster.count }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    {% include 'footer.html' %}
+</body>
+</html>

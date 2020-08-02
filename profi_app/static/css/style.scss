@@ -1,0 +1,77 @@
+$white: #fff;
+$grey: rgb(237, 237, 237);
+$darkgrey: rgb(160, 160, 160);
+$red: #b0242e;
+$orange: #f5b30c;
+$black: rgb(0, 0, 0);
+$blue: #007bff;
+$green: rgb(6, 196, 22);
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-color: $grey;
+}
+.vertical{
+    color: $black;
+}
+.errors{
+    color: rgb(255, 0, 0);
+}
+.succsess_messages{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $green;
+    width: 100%;
+    margin: auto;
+    background-color: rgb(203, 230, 205);
+    border-radius: 6px;
+    padding: 6px 20px;
+    margin-bottom: 10px;
+    .success{
+        color: $green;
+        text-align: left;
+        margin-bottom: 0;
+    }
+    a{
+        color: $green;
+        text-align: right;
+    }
+}
+
+.active{
+    font-weight: bold;
+}
+
+.comments_count_container{
+    .comments_count{
+        a{
+            color: $blue;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
+}
+
+@import'./header';
+@import'./footer';
+@import'./_homepage';
+@import'./_dashboardpage';
+@import'./_userprofilepage';
+@import'./_viewjobpage';
+@import'./_createjobpage';
+@import'./_alluserspage';
+
+
+
+
+
+
+
